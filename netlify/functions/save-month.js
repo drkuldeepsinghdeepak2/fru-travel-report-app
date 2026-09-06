@@ -1,7 +1,9 @@
+const { connectLambda } = require('@netlify/blobs');
 const { dataStore } = require('./utils/store');
 const { requireAuth } = require('./utils/auth-helper');
 
 exports.handler = async (event) => {
+  connectLambda(event);
   if (event.httpMethod !== 'POST') {
     return { statusCode: 405, body: JSON.stringify({ error: 'Method not allowed.' }) };
   }

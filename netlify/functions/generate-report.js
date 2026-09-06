@@ -1,3 +1,4 @@
+const { connectLambda } = require('@netlify/blobs');
 const { dataStore, usersStore } = require('./utils/store');
 const { requireAuth } = require('./utils/auth-helper');
 const { aggregate } = require('./utils/aggregate');
@@ -6,7 +7,6 @@ const { buildReportExcel } = require('./utils/buildReportExcel');
 const RANGE_LABELS = { 1: 'last 1 month', 3: 'last 3 months', 6: 'last 6 months', 12: 'last 1 year' };
 
 function monthsBack(count, asOfMonth) {
-  // asOfMonth: 'YYYY-MM' - the most recent month to include
   const [y, m] = asOfMonth.split('-').map(Number);
   const result = [];
   for (let i = count - 1; i >= 0; i--) {
@@ -17,6 +17,7 @@ function monthsBack(count, asOfMonth) {
 }
 
 exports.handler = async (event) => {
+  connectLambda(event);
   let employeeCode;
   try {
     employeeCode = requireAuth(event);

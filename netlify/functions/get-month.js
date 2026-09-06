@@ -1,7 +1,9 @@
+const { connectLambda } = require('@netlify/blobs');
 const { dataStore } = require('./utils/store');
 const { requireAuth } = require('./utils/auth-helper');
 
 exports.handler = async (event) => {
+  connectLambda(event);
   let employeeCode;
   try {
     employeeCode = requireAuth(event);
