@@ -1,0 +1,15 @@
+{
+  "name": "fru-travel-report-app",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Internal tool: employees upload monthly travel plans + trip reports, and download consolidated field-visit Excel reports.",
+  "scripts": {
+    "dev": "netlify dev"
+  },
+  "dependencies": {
+    "@netlify/blobs": "^7.2.0",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.2",
+    "exceljs": "^4.4.0"
+  }
+}
