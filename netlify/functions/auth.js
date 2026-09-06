@@ -1,9 +1,11 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const { connectLambda } = require('@netlify/blobs');
 const { usersStore } = require('./utils/store');
 const { JWT_SECRET } = require('./utils/auth-helper');
 
 exports.handler = async (event) => {
+  connectLambda(event);
   if (event.httpMethod !== 'POST') {
     return { statusCode: 405, body: JSON.stringify({ error: 'Method not allowed.' }) };
   }
@@ -30,7 +32,6 @@ exports.handler = async (event) => {
     const existing = await store.get(code, { type: 'json' });
 
     if (!existing) {
-      // First time this Login ID has been used -> create the account with the given password
       const passwordHash = await bcrypt.hash(password, 10);
       await store.setJSON(code, {
         employeeCode: code,
