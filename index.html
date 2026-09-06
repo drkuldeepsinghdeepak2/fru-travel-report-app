@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>FRU Field Visit Tracker</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<div id="login-screen" class="screen">
+  <div class="card login-card">
+    <h1>FRU Field Visit Tracker</h1>
+    <p class="subtitle">Pick any Login ID and password — first time in, that combination becomes your account.</p>
+
+    <label>Login ID</label>
+    <input type="text" id="loginId" placeholder="e.g. your first name" autocomplete="username" />
+
+    <label>Password</label>
+    <input type="password" id="password" placeholder="Password" autocomplete="current-password" />
+
+    <div class="optional-fields">
+      <p class="hint">Only needed the first time (used on your reports):</p>
+      <label>Your Name</label>
+      <input type="text" id="fullName" placeholder="Dr Kuldeep Singh Deepak" />
+      <label>Team</label>
+      <input type="text" id="team" placeholder="FRU Activation" />
+      <label>Designation</label>
+      <input type="text" id="designation" placeholder="Deputy Director FRU" />
+    </div>
+
+    <button id="loginBtn">Continue</button>
+    <p id="loginError" class="error"></p>
+  </div>
+</div>
+
+<div id="dashboard-screen" class="screen hidden">
+  <header class="topbar">
+    <div>
+      <strong>FRU Field Visit Tracker</strong>
+      <span id="whoami" class="whoami"></span>
+    </div>
+    <button id="logoutBtn" class="link-btn">Log out</button>
+  </header>
+
+  <main class="dashboard">
+
+    <section class="card">
+      <h2>1. Select Month</h2>
+      <select id="monthSelect"></select>
+      <p id="monthStatus" class="hint"></p>
+    </section>
+
+    <section class="card">
+      <h2>2. Travel Plan</h2>
+      <p class="hint">Drop or select this month's Travel Plan (.xlsx)</p>
+      <div id="dropTravelPlan" class="dropzone">
+        <span id="travelPlanLabel">Drag &amp; drop your Travel Plan .xlsx here, or click to browse</span>
+        <input type="file" id="travelPlanInput" accept=".xlsx" hidden />
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>3. Trip Report</h2>
+      <p class="hint">Paste your trip report notes below, or drop a .txt file</p>
+      <div id="dropTripReport" class="dropzone textzone">
+        <textarea id="tripReportText" placeholder="Paste this month's trip report / field visit notes here..."></textarea>
+      </div>
+    </section>
+
+    <div class="save-row">
+      <button id="saveBtn">Save this month's data</button>
+      <span id="saveStatus" class="hint"></span>
+    </div>
+
+    <section class="card">
+      <h2>4. Download Report</h2>
+      <div class="download-row">
+        <div>
+          <label>Period</label>
+          <select id="rangeSelect">
+            <option value="1">Last 1 month</option>
+            <option value="3" selected>Last 3 months</option>
+            <option value="6">Last 6 months</option>
+            <option value="12">Last 1 year</option>
+          </select>
+        </div>
+        <div>
+          <label>Highlight a month?</label>
+          <select id="highlightSelect">
+            <option value="none">No highlight</option>
+          </select>
+        </div>
+        <button id="downloadBtn">Download Excel Report</button>
+      </div>
+      <p id="downloadStatus" class="hint"></p>
+    </section>
+
+  </main>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
